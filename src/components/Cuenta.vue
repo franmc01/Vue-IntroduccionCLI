@@ -6,9 +6,9 @@
     {{ servicio }}
   </div>
   <h4>Acciones cuenta</h4>
-  <AccionesCuenta texto="Aumentar" />
+  <AccionesCuenta texto="Aumentar" @accion="aumentar" />
   &nbsp;
-  <AccionesCuenta texto="Disminuir" />
+  <AccionesCuenta texto="Disminuir" @accion="disminuir" />
   <!-- <div v-for="(servicio, index) in servicios" :key="index">
     {{ servicio }}
   </div> -->
@@ -35,6 +35,10 @@ export default {
       this.saldo = this.saldo + 100;
     },
     disminuir() {
+      if (this.saldo === 0) {
+        alert("Saldo agotado");
+        return;
+      }
       this.saldo = this.saldo - 100;
     },
   },
