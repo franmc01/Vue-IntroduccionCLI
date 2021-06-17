@@ -6,9 +6,9 @@
     {{ servicio }}
   </div>
   <h4>Acciones cuenta</h4>
-  <AccionesCuenta texto="Aumentar" @accion="aumentar" />
+  <AccionesCuenta texto="Aumentar" @accion="aumentar"/>
   &nbsp;
-  <AccionesCuenta texto="Disminuir" @accion="disminuir" />
+  <AccionesCuenta texto="Disminuir" @accion="disminuir" :desactivar="desactivar" />
   <!-- <div v-for="(servicio, index) in servicios" :key="index">
     {{ servicio }}
   </div> -->
@@ -24,19 +24,21 @@ export default {
   },
   data() {
     return {
-      saldo: 2000,
+      saldo: 600,
       tipo: "Corriente",
       estado: true,
       servicios: ["Retiro", "Deposito", "Préstamo"],
+      desactivar: false
     };
   },
   methods: {
     aumentar() {
       this.saldo = this.saldo + 100;
+      this.desactivar = false;
     },
     disminuir() {
       if (this.saldo === 0) {
-        alert("Saldo agotado");
+        this.desactivar = true;
         return;
       }
       this.saldo = this.saldo - 100;
